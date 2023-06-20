@@ -34,6 +34,8 @@ import { LoginComponent } from './login/login.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
+import { MatSelectModule } from '@angular/material/select';
+
 
 const routes: Routes = [
   {
@@ -85,7 +87,8 @@ const routes: Routes = [
     MatInputModule, MatFormFieldModule, MatDatepickerModule,
     MatListModule, MatCardModule, MatCheckboxModule, MatSlideToggleModule,
     MatTableModule, MatPaginatorModule,
-    MatToolbarModule, MatSidenavModule
+    MatToolbarModule, MatSidenavModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

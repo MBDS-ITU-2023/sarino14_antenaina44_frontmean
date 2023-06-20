@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Assignment } from '../assignment.model';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Router } from '@angular/router';
+import { MatieresService } from 'src/app/shared/matieres.service';
 
 @Component({
   selector: 'app-add-assignment',
   templateUrl: './add-assignment.component.html',
   styleUrls: ['./add-assignment.component.css']
 })
-export class AddAssignmentComponent {
+export class AddAssignmentComponent implements OnInit{
 
   // champs du formulaire
   nomDevoir = "";
@@ -16,16 +17,32 @@ export class AddAssignmentComponent {
   auteur = "admin";
   note = 0;
   remarques = "";
+  matiereId = "";
+
+  matieres: { value: number, label: string }[] = [];
+  auteurName!: string;
+  auteurPhoto!: string;
 
 
   constructor(private assignmentsService: AssignmentsService,
+    private matieresService: MatieresService,
               private router:Router) { }
+  ngOnInit(): void {
+    this.matieresService.getMatieresForSelect().subscribe(
+      matiere => {
+        this.matieres = matiere;
+      },
+      error => {
+        // Gérer l'erreur
+      }
+    );
+  }
 
   onSubmit(event: any) {
     // On vérifie que les champs ne sont pas vides
     if (this.nomDevoir === "") return;
     if (this.dateDeRendu === undefined) return;
-    if (this.auteur === "") return;
+    if (this.auteurName === "") return;
     if (this.note === undefined) return;
 
     let nouvelAssignment = new Assignment();
@@ -34,7 +51,9 @@ export class AddAssignmentComponent {
     nouvelAssignment.nom = this.nomDevoir;
     nouvelAssignment.dateDeRendu = this.dateDeRendu;
     nouvelAssignment.rendu = false;
-    nouvelAssignment.auteur = this.auteur;
+    nouvelAssignment.auteurName = this.auteurName;
+    nouvelAssignment.auteurPhoto = this.auteurPhoto;
+    nouvelAssignment.matiereId = this.matiereId;
     nouvelAssignment.note = this.note;
     nouvelAssignment.remarques = this.remarques;
 

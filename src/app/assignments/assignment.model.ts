@@ -4,8 +4,10 @@ export class Assignment {
     nom!: string;
     dateDeRendu!: Date;
     rendu!: boolean;
-    auteur!: string;
+    auteurName!: string;
+    auteurPhoto!: string;
     note!: number;
     remarques!: string;
+    matiereId!: string;
 }
 

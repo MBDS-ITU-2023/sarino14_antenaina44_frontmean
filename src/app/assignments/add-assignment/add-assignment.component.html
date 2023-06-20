@@ -18,6 +18,13 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
+        <mat-label>Matieres</mat-label>
+        <mat-select [(ngModel)]="matiereId" name="matiereId" required>
+          <mat-option *ngFor="let matiere of matieres" [value]="matiere.value">{{ matiere.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
         <mat-label>Remarques</mat-label>
         <input matInput [(ngModel)]="remarques" name="remarques">
     </mat-form-field>
