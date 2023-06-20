@@ -123,8 +123,7 @@
                                                             <p appRendu *ngIf="a.rendu; else nonsoumis">
                                                                 <label><strong>{{a.nom}} - id =
                                                                         {{a._id}}</strong></label> <span
-                                                                    style="float: right;">
-
+                                                                    style="position: absolute; top: 0; right: 0;">
                                                                     <mat-chip color="accent">
                                                                         RENDU
                                                                     </mat-chip>
@@ -138,7 +137,7 @@
                                                         <mat-divider></mat-divider>
                                                         <ng-template #nonsoumis>
                                                             <label><strong>{{a.nom}} - id = {{a._id}}</strong></label>
-                                                            <span style="float: right;"><mat-chip color="warn">
+                                                            <span style="position: absolute; top: 0; right: 0;"><mat-chip color="warn">
                                                                     NON RENDU
                                                                 </mat-chip></span>
                                                         </ng-template>

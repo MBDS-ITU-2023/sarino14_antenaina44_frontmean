@@ -79,7 +79,7 @@ mat-sidenav {
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 50% 50%;
   background-color: #d8dee2;
   padding: 10px;
 }
