@@ -10,7 +10,7 @@ mat-sidenav {
 .home-content {
   margin-left: 250px;
   margin-right: 250px;
-  border: 1px solid #4CAF50;
+  /* border: 1px solid #4CAF50; */
 }
 
 .container {

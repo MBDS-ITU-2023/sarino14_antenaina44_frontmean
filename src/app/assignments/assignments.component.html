@@ -121,12 +121,18 @@
                                                         routerLink="/assignments/{{a.id}}">
                                                         <mat-list-item>
                                                             <p appRendu *ngIf="a.rendu; else nonsoumis">
-                                                                <label><strong>{{a.nom}} - id =
-                                                                        {{a._id}}</strong></label> <span
-                                                                    style="position: absolute; top: 0; right: 0;">
-                                                                    <mat-chip color="accent">
+
+                                                                <span style="position: absolute; top: 0; left: 0;">
+                                                                    <label><strong>{{a.nom}} - id =
+                                                                            {{a._id}}</strong></label>
+                                                                </span>
+
+                                                                <span style="position: absolute; top: 0; right: 0;">
+                                                                    <!-- <mat-chip color="accent">
                                                                         RENDU
-                                                                    </mat-chip>
+                                                                    </mat-chip> -->
+
+                                                                    <mat-chip-option color="green" disabled selected>RENDU</mat-chip-option>
                                                                 </span>
                                                             </p>
                                                         </mat-list-item>
@@ -136,8 +142,13 @@
                                                         </mat-card-actions>
                                                         <mat-divider></mat-divider>
                                                         <ng-template #nonsoumis>
-                                                            <label><strong>{{a.nom}} - id = {{a._id}}</strong></label>
-                                                            <span style="position: absolute; top: 0; right: 0;"><mat-chip color="warn">
+                                                            <span style="position: absolute; top: 0; left: 0;">
+                                                                <label><strong>{{a.nom}} - id =
+                                                                        {{a._id}}</strong></label></span>
+                                                            <span
+                                                                style="position: absolute; top: 0; right: 0;"><mat-chip
+                                                                    color="warn" style="background-color: red;
+                                                                color: white;">
                                                                     NON RENDU
                                                                 </mat-chip></span>
                                                         </ng-template>
