@@ -1,20 +1,75 @@
-<mat-card *ngIf="assignmentTransmis">
-  <mat-card-content>
-    <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
-    <mat-card-subtitle>Date de rendu : {{assignmentTransmis.dateDeRendu | date: 'dd/MM/yy'}}</mat-card-subtitle>
-  </mat-card-content>
-  <mat-card-actions id="bottom">
-    <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
-      Rendu
-    </mat-checkbox>
-    
-    <button mat-raised-button color="primary"
-            (click)="onEditAssignment()"
-            [disabled]="!isLogged()"
-    >
-      EDIT
-    </button>
+<mat-toolbar>
+  <mat-toolbar-row>
+      <h4>Assignments &nbsp;</h4>
+      <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
+      <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home </button>
+      <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened" mode="side">
+      <mat-nav-list>
+          <a mat-list-item routerLink="/home">Home</a>
+      </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <div class="home-content">
 
-  <button mat-raised-button color="accent" (click)="onDeleteAssignment()">DELETE</button>
-  </mat-card-actions>
-</mat-card>
+        <mat-card *ngIf="assignmentTransmis">
+          <mat-card-header>
+            
+            <div mat-card-avatar class="example-header-image" style="margin-right: 20px;">
+              <img mat-card-image src="./assets/images/matiere.png" alt="Photo de matière" style="width: 60px; height: 60px;">
+            </div>
+            <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
+            <mat-card-subtitle>Date de rendu : {{assignmentTransmis.dateDeRendu | date: 'dd/MM/yy'}}</mat-card-subtitle>
+          </mat-card-header>    
+          <mat-card-content>
+            <div>
+              <h4 style="font-weight: bold;">Professeur : </h4>
+              <img mat-card-image src="./assets/images/prfIOS.png" alt="Photo de professeur" style="width: 100px; height: 100px;">
+              <mat-card-subtitle>Nom professeur</mat-card-subtitle>
+            </div>
+
+            <div>
+              <h4 style="font-weight: bold;">Auteur : </h4>
+              <img src="./assets/images/student.png" alt="eleve" style="width: 100px; height: 100px;">
+              <mat-card-subtitle>
+                Student
+              </mat-card-subtitle>
+            </div>
+
+            <div>
+              <h4 style="font-weight: bold;">Notes : </h4>
+              <mat-card-subtitle>
+                5
+              </mat-card-subtitle>
+            </div>
+
+            <div>
+              <h4 style="font-weight: bold;">Remarques : </h4>
+              <mat-card-subtitle>
+                Moyennne
+              </mat-card-subtitle>
+            </div>
+            
+            <mat-card-actions id="bottom">
+              <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
+                Rendu
+              </mat-checkbox>
+              
+              <button mat-raised-button color="primary"
+                      (click)="onEditAssignment()"
+                      [disabled]="!isLogged()"
+                      style="margin-right: 10px;"
+              >
+                EDIT
+              </button>
+  
+            <button mat-raised-button color="accent" (click)="onDeleteAssignment()">DELETE</button>
+            </mat-card-actions>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
