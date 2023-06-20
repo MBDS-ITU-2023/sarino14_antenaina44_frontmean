@@ -1,36 +1,55 @@
-<div class="container" *ngIf="assignment">
-    <h1>Edition de l'assignment {{assignment.nom}}</h1>
-    <form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">
-      <label for="nom">Nom</label>
-      <mat-form-field>
-        <input matInput placeholder="Edition du nom" [(ngModel)]="nomAssignment" name="assignment-name">
-      </mat-form-field>
-      <label for="dateRendu">Dade de rendu</label>
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Edition de la date" [(ngModel)]="dateDeRendu" name="date">
-        <mat-datepicker-toggle matSuffix [for]="picker">
-        </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <label for="note">Note</label>
-      <mat-form-field>
-        <input matInput placeholder="Note" [(ngModel)]="note" name="note">
-      </mat-form-field>
-      <label for="matieres">Matière</label>
-      <mat-form-field appearance="fill">
-        <mat-label>Matieres</mat-label>
-        <mat-select [(ngModel)]="matiereId" name="matiereId" required>
-          <mat-option *ngFor="let matiere of matieres" [value]="matiere.value">{{ matiere.label }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <label for="remarques">Remarques</label>
-      <mat-form-field>
-        <input matInput placeholder="Remarques" [(ngModel)]="remarques" name="remarques">
-      </mat-form-field>
+<mat-toolbar>
+  <mat-toolbar-row>
+      <h4>Assignments &nbsp;</h4>
+      <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
+      <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home </button>
+      <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened" mode="side">
+      <mat-nav-list>
+          <a mat-list-item routerLink="/home">Home</a>
+      </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <div class="home-content">
 
-      <button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu))||(!note)">
-        Sauver
-      </button>
-    </form>
-   </div>
-      
+            <div class="container" *ngIf="assignment">
+              <h1>Edition de l'assignment {{assignment.nom}}</h1>
+              <form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">
+                <label for="nom">Nom</label>
+                <mat-form-field>
+                  <input matInput placeholder="Edition du nom" [(ngModel)]="nomAssignment" name="assignment-name">
+                </mat-form-field>
+                <label for="dateRendu">Dade de rendu</label>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="Edition de la date" [(ngModel)]="dateDeRendu" name="date">
+                  <mat-datepicker-toggle matSuffix [for]="picker">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <label for="note">Note</label>
+                <mat-form-field>
+                  <input matInput placeholder="Note" [(ngModel)]="note" name="note">
+                </mat-form-field>
+                <label for="matieres">Matière</label>
+                <mat-form-field appearance="fill">
+                  <mat-label>Matieres</mat-label>
+                  <mat-select [(ngModel)]="matiereId" name="matiereId" required>
+                    <mat-option *ngFor="let matiere of matieres" [value]="matiere.value">{{ matiere.label }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <label for="remarques">Remarques</label>
+                <mat-form-field>
+                  <input matInput placeholder="Remarques" [(ngModel)]="remarques" name="remarques">
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu))||(!note)">
+                  Sauver
+                </button>
+              </form>
+            </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

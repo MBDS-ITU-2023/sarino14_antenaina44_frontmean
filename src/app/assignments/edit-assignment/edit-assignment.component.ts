@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 import { MatieresService } from 'src/app/shared/matieres.service';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-edit-assignment',
@@ -22,11 +23,14 @@ export class EditAssignmentComponent implements OnInit {
 
   matieres: { value: number, label: string }[] = [];
 
+  opened = false;
+
   constructor(
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private matieresService: MatieresService
+    private matieresService: MatieresService,
+    private authService:AuthService
   ) { }
 
   ngOnInit(): void {
@@ -88,5 +92,9 @@ export class EditAssignmentComponent implements OnInit {
         // navigation vers la home page
         this.router.navigate(['/home']);
       });
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

@@ -1,35 +1,55 @@
-<form ngForm #assignmentForm (submit)="onSubmit($event); assignmentForm.reset()" class="form">
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h4>Assignments &nbsp;</h4>
+        <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
+        <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home </button>
+        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav [(opened)]="opened" mode="side">
+        <mat-nav-list>
+            <a mat-list-item routerLink="/home">Home</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="home-content">
 
-    <mat-form-field>
-        <input matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir" required>
-    </mat-form-field>
+            <form ngForm #assignmentForm (submit)="onSubmit($event); assignmentForm.reset()" class="form">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Date de rendu</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date" required>
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+                <mat-form-field>
+                    <input matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir" required>
+                </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Note</mat-label>
-        <input matInput [(ngModel)]="note" name="note" required>
-    </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Date de rendu</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date" required>
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Matieres</mat-label>
-        <mat-select [(ngModel)]="matiereId" name="matiereId" required>
-          <mat-option *ngFor="let matiere of matieres" [value]="matiere.value">{{ matiere.label }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Note</mat-label>
+                    <input matInput [(ngModel)]="note" name="note" required>
+                </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Remarques</mat-label>
-        <input matInput [(ngModel)]="remarques" name="remarques">
-    </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Matieres</mat-label>
+                    <mat-select [(ngModel)]="matiereId" name="matiereId" required>
+                    <mat-option *ngFor="let matiere of matieres" [value]="matiere.value">{{ matiere.label }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-    <button mat-stroked-button color="primary">
-        Ajouter un devoir
-    </button>
-</form>
+                <mat-form-field appearance="fill">
+                    <mat-label>Remarques</mat-label>
+                    <input matInput [(ngModel)]="remarques" name="remarques">
+                </mat-form-field>
+
+                <button mat-stroked-button color="primary">
+                    Ajouter un devoir
+                </button>
+            </form>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
