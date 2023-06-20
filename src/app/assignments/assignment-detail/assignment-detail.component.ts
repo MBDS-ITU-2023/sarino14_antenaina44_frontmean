@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class AssignmentDetailComponent implements OnInit {
   assignmentTransmis?: Assignment;
 
+  opened = false;
+
   constructor(private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
@@ -80,5 +82,9 @@ export class AssignmentDetailComponent implements OnInit {
   isLogged() {
     // renvoie si on est loggé ou pas
     return this.authService.loggedIn;
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }
