@@ -1,0 +1,160 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h4>Assignments &nbsp;</h4>
+        <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
+        <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home </button>
+        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav [(opened)]="opened" mode="side">
+        <mat-nav-list>
+            <a mat-list-item routerLink="/home">Home</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="home-content">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title><strong>{{titre}}</strong>
+                    </mat-card-title>
+                    <div class="spacer"></div> <!-- Ajoutez cette ligne pour créer un espace vide flexible -->
+                    <a routerLink="/add">
+                        <button mat-flat-button style="background-color: #57a4e2; " color="accent">Ajouter
+                            Assignment</button>
+                    </a>
+                </mat-card-header>
+                <br>
+                <main class="container">
+                    <div class="card-padded">
+                        <mat-card>
+                            <div style="background-color: #57a4e2;">
+                                <mat-card-header>
+                                    <mat-card-title>
+                                        Affichage avec data table
+                                        <mat-card-subtitle> Nb assignments total {{totalDocs}}, par page {{limit}},
+                                            nbPages
+                                            {{totalPages}}
+                                        </mat-card-subtitle>
+                                    </mat-card-title>
+                                    <div class="spacer"></div>
+                                    <!-- Ajoutez cette ligne pour créer un espace vide flexible -->
+                                    <p>
+                                        Régler nb par page :
+                                        <input type="range" min=1 max=100 value=10 [(ngModel)]="limit"
+                                            (change)="getAssignments()" /> {{limit}}
+                                    </p>
+                                </mat-card-header>
+                                <br>
+                            </div>
+                            <table mat-table [dataSource]="assignments" class="mat-elevation-z8 demo-table">
+                                <!-- id Column -->
+                                <ng-container matColumnDef="id">
+                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef> Id
+                                    </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                </ng-container>
+
+                                <!-- nom Column -->
+                                <ng-container matColumnDef="nom">
+                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef> Nom
+                                    </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                                </ng-container>
+
+                                <!-- dateDeRendu Column -->
+                                <ng-container matColumnDef="dateDeRendu">
+                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef> Date
+                                        de
+                                        rendu </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.dateDeRendu}} </td>
+                                </ng-container>
+
+                                <!-- rendu Column -->
+                                <ng-container matColumnDef="rendu">
+                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef>
+                                        Rendu </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.rendu}} </td>
+                                </ng-container>
+
+                                <tr mat-header-row class="header-row" style="border-bottom: 2px groove black;"
+                                    *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                                aria-label="Selection de la page des assigments" (page)="handlePage($event)"
+                                class="demo-paginator" [length]="totalPages" [pageSize]="limit" [pageIndex]="page">
+                            </mat-paginator>
+                        </mat-card>
+                    </div>
+                    <hr>
+                    <div class="card-flat">
+                        <mat-card>
+                            <div style="background-color: #57a4e2;">
+                                <mat-card-header>
+                                    <mat-card-title>
+                                        <!-- TITLE -->
+                                        Affichage avec mat-list / mat-list-item
+                                        <mat-card-subtitle>
+                                            <div>
+                                                <!-- SUBTITLE CONTENT -->
+                                            </div>
+                                        </mat-card-subtitle>
+                                    </mat-card-title>
+                                    <div class="spacer"></div>
+                                    <!-- Ajoutez cette ligne pour créer un espace vide flexible -->
+                                    <div>
+                                        <!-- RIGHT HEADER CONTENT -->
+                                    </div>
+                                </mat-card-header>
+                                <br>
+                            </div>
+                            <div>
+                                <!-- YOUR_CONTENT GOES HERE-->
+                                <mat-list *ngFor="let a of assignments">
+                                    <a style="text-decoration: none;" routerLink="/assignments/{{a.id}}">
+                                        <mat-list-item>
+                                            <p appRendu *ngIf="a.rendu; else nonsoumis">
+                                                <label><strong>{{a.nom}} - id = {{a._id}}</strong></label> <span
+                                                    style="float: right;">RENDU</span>
+                                            </p>
+                                        </mat-list-item>
+                                        <h3 mat-subheader>Date limite: {{a.dateDeRendu | date: 'dd/MM/yy'}}</h3>
+                                        <mat-divider></mat-divider>
+                                        <ng-template #nonsoumis>
+                                            <label><strong>{{a.nom}} - id = {{a._id}}</strong></label> <span
+                                                style="float: right;"><button mat-stroked-button color="warn">NON
+                                                    RENDU</button></span>
+                                        </ng-template>
+                                    </a>
+                                    <mat-divider></mat-divider>
+                                </mat-list>
+                            </div>
+                        </mat-card>
+                    </div>
+                    <h1>Exemple de scrolling virtuel infini</h1>
+                    <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport" #scroller>
+                        <mat-list *cdkVirtualFor="let a of assignments">
+                            <a routerLink="/assignments/{{a.id}}">
+                                <h3 mat-subheader>Date limite: {{a.dateDeRendu | date: 'dd/MM/yy'}}</h3>
+                                <mat-list-item>
+                                    <p appRendu *ngIf="a.rendu; else nonsoumis">
+                                        {{a.nom}} id = {{a._id}}
+                                    </p>
+                                    <ng-template #nonsoumis>
+                                        {{a.nom}} NON RENDU id = {{a._id}}
+                                    </ng-template>
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                            </a>
+                        </mat-list>
+                    </cdk-virtual-scroll-viewport>
+
+                </main>
+                <mat-card-actions align="end">
+                    <button mat-button>SHARE</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

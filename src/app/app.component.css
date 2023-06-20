@@ -1,0 +1,19 @@
+mat-sidenav-container {
+    height: calc(205vh - 115vh);
+}
+
+mat-sidenav {
+    width: 200px;
+    background-color: #eee;
+}
+
+.home-content {
+    margin-left: 250px;
+    margin-right: 250px;
+    /* border: 1px solid #4CAF50; */
+}
+
+.ml-auto {
+    margin-left: auto;
+  }
+  

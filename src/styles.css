@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 120;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.card-padded {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.header-row {
+    border-bottom: 2px solid black;
+}
