@@ -85,5 +85,5 @@ Error: bundle initial exceeded maximum budget. Budget 1.00 MB was not met by 48.
 ## Contributions
 
 | Identifiant | Mots de passe     |
-| :-------- | :------- | :------------------------- |
+| :-------- | :------- | 
 | admin | admin |
