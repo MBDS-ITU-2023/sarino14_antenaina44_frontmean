@@ -23,3 +23,6 @@ body {
 .header-row {
     border-bottom: 2px solid black;
 }
+.ml-auto {
+    margin-left: auto;
+  }

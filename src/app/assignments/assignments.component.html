@@ -3,7 +3,9 @@
         <h4>Assignments &nbsp;</h4>
         <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
         <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home </button>
-        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+        <nav class="ml-auto">
+            <button mat-raised-button color="primary" (click)="logout()">Se deconnecter</button>
+        </nav>
     </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>
@@ -116,15 +118,26 @@
                                         <mat-list-item>
                                             <p appRendu *ngIf="a.rendu; else nonsoumis">
                                                 <label><strong>{{a.nom}} - id = {{a._id}}</strong></label> <span
-                                                    style="float: right;">RENDU</span>
+                                                    style="float: right;">
+
+                                                    <mat-chip color="accent">
+                                                        RENDU
+                                                    </mat-chip>
+                                                </span>
                                             </p>
                                         </mat-list-item>
-                                        <h3 mat-subheader>Date limite: {{a.dateDeRendu | date: 'dd/MM/yy'}}</h3>
+                                        <!-- <h3 mat-subheader>
+                                            Date limite: {{a.dateDeRendu | date: 'dd/MM/yy'}} -->
+                                            <mat-card-actions>
+                                                <button mat-button>Date limite: {{a.dateDeRendu | date: 'dd/MM/yy'}}</button>
+                                            </mat-card-actions>
+                                        <!-- </h3> -->
                                         <mat-divider></mat-divider>
                                         <ng-template #nonsoumis>
                                             <label><strong>{{a.nom}} - id = {{a._id}}</strong></label> <span
-                                                style="float: right;"><button mat-stroked-button color="warn">NON
-                                                    RENDU</button></span>
+                                                style="float: right;"><mat-chip color="warn">
+                                                    NON RENDU
+                                                </mat-chip></span>
                                         </ng-template>
                                     </a>
                                     <mat-divider></mat-divider>
