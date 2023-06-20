@@ -3,7 +3,9 @@
         <h4>Assignments &nbsp;</h4>
         <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
         <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home </button>
-        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+        <div class="ml-auto">
+            <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+        </div>
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-sidenav-container>
