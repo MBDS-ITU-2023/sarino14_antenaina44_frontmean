@@ -1,8 +1,8 @@
-<mat-toolbar >
+<mat-toolbar>
     <mat-toolbar-row>
         <h4>Matieres &nbsp;</h4>
         <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
-        <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home </button>        
+        <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home </button>
         <button mat-raised-button color="primary" (click)="logout()">Logout</button>
     </mat-toolbar-row>
 </mat-toolbar>
@@ -15,12 +15,13 @@
     <mat-sidenav-content>
         <div class="home-content">
             <mat-card>
-                <mat-card-header>
+                <mat-card-header style="margin-bottom: 10px;">
                     <mat-card-title><strong>{{titre}}</strong>
                     </mat-card-title>
                     <div class="spacer"></div> <!-- Ajoutez cette ligne pour créer un espace vide flexible -->
-                    <a routerLink="/add">
-                        <button mat-flat-button style="background-color: #57a4e2; " color="accent">Ajouter Matiere</button>
+                    <a routerLink="/addmatiere">
+                        <button mat-flat-button style="background-color: #57a4e2; " color="accent">Ajouter
+                            Matiere</button>
                     </a>
                 </mat-card-header>
                 <br>
@@ -35,7 +36,8 @@
                                             {{totalPages}}
                                         </mat-card-subtitle>
                                     </mat-card-title>
-                                    <div class="spacer"></div> <!-- Ajoutez cette ligne pour créer un espace vide flexible -->
+                                    <div class="spacer"></div>
+                                    <!-- Ajoutez cette ligne pour créer un espace vide flexible -->
                                     <p>
                                         Régler nb par page :
                                         <input type="range" min=1 max=100 value=10 [(ngModel)]="limit"
@@ -47,41 +49,44 @@
                             <table mat-table [dataSource]="matieres" class="mat-elevation-z8 demo-table">
                                 <!-- id Column -->
                                 <ng-container matColumnDef="id">
-                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef> Id </th>
+                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef> Id
+                                    </th>
                                     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                                 </ng-container>
-            
+
                                 <!-- nom Column -->
                                 <ng-container matColumnDef="nom">
-                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef> Nom </th>
+                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef> Nom
+                                    </th>
                                     <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
                                 </ng-container>
-            
+
                                 <!-- image Column -->
                                 <ng-container matColumnDef="image">
-                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef> Image </th>
+                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef>
+                                        Image </th>
                                     <td mat-cell *matCellDef="let element"> {{element.image}} </td>
                                 </ng-container>
 
-                                 <!-- professeur Column -->
-                                 <ng-container matColumnDef="professeur">
-                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef> 
-                                        Image de professeur 
+                                <!-- professeur Column -->
+                                <ng-container matColumnDef="professeur">
+                                    <th mat-header-cell style="border-bottom: 1px groove black;" *matHeaderCellDef>
+                                        Image de professeur
                                     </th>
                                     <td mat-cell *matCellDef="let element"> {{element.professeur}} </td>
                                 </ng-container>
-            
+
                                 <tr mat-header-row class="header-row" style="border-bottom: 2px groove black;"
                                     *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                             </table>
                             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-                                aria-label="Selection de la page des assigments" (page)="handlePage($event)" class="demo-paginator"
-                                [length]="totalPages" [pageSize]="limit" [pageIndex]="page">
+                                aria-label="Selection de la page des assigments" (page)="handlePage($event)"
+                                class="demo-paginator" [length]="totalPages" [pageSize]="limit" [pageIndex]="page">
                             </mat-paginator>
                         </mat-card>
                     </div>
-            
+
                 </main>
                 <mat-card-actions align="end">
                     <button mat-button>SHARE</button>

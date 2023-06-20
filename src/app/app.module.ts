@@ -38,6 +38,8 @@ import { MatSelectModule } from '@angular/material/select';
 
 import {MatChipsModule} from '@angular/material/chips';
 
+import { MatieresComponent } from './matieres/matieres.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -64,6 +66,11 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'matieres',
+    component: MatieresComponent,
+    canActivate: [authGuard]
+  },
+  {
     path: 'login',
     component: LoginComponent
   }
@@ -76,7 +83,8 @@ const routes: Routes = [
     AssignmentDetailComponent,
     AddAssignmentComponent,
     EditAssignmentComponent,
-    LoginComponent
+    LoginComponent,
+    MatieresComponent
   ],
   imports: [
     BrowserModule,
