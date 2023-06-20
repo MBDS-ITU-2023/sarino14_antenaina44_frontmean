@@ -3,7 +3,6 @@ import { Assignment } from '../assignments/assignment.model';
 import { Observable, catchError, forkJoin, map, of, tap } from 'rxjs';
 import { LoggingService } from './logging.service';
 import { HttpClient } from '@angular/common/http';
-import { bdInitialAssignments } from './data';
 
 @Injectable({
   providedIn: 'root'
@@ -111,41 +110,41 @@ assignments:Assignment[] = []
     */
   }
 
-  peuplerBD() {
-    bdInitialAssignments.forEach(a => {
-      const newAssignment = new Assignment();
-      newAssignment.id = a.id;
-      newAssignment.nom = a.nom;
-      newAssignment.dateDeRendu = new Date(a.dateDeRendu);
-      newAssignment.rendu = a.rendu;
+  // peuplerBD() {
+  //   bdInitialAssignments.forEach(a => {
+  //     const newAssignment = new Assignment();
+  //     newAssignment.id = a.id;
+  //     newAssignment.nom = a.nom;
+  //     newAssignment.dateDeRendu = new Date(a.dateDeRendu);
+  //     newAssignment.rendu = a.rendu;
 
-      this.addAssignment(newAssignment)
-      .subscribe((reponse) => {
-        console.log(reponse.message);
-      })
-    })
-  }
+  //     this.addAssignment(newAssignment)
+  //     .subscribe((reponse) => {
+  //       console.log(reponse.message);
+  //     })
+  //   })
+  // }
 
   // cette version retourne un Observable. Elle permet de savoir quand
   // l'opération est terminée (l'ajout des 1000 assignments)
-  peuplerBDavecForkJoin():Observable<any> {
-    // tableau d'observables (les valeurs de retour de addAssignment)
-    let appelsVersAddAssignment:Observable<any>[] = [];
+  // peuplerBDavecForkJoin():Observable<any> {
+  //   // tableau d'observables (les valeurs de retour de addAssignment)
+  //   let appelsVersAddAssignment:Observable<any>[] = [];
  
-    bdInitialAssignments.forEach(a => {
-      const nouvelAssignment = new Assignment();
-      nouvelAssignment.id = a.id;
-      nouvelAssignment.nom = a.nom;
-      nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
-      nouvelAssignment.rendu = a.rendu;
-      nouvelAssignment.auteur = a.auteur ?? '';
-      nouvelAssignment.note = a.note ?? 0;
-      nouvelAssignment.remarques = a.remarques ?? '';
+  //   bdInitialAssignments.forEach(a => {
+  //     const nouvelAssignment = new Assignment();
+  //     nouvelAssignment.id = a.id;
+  //     nouvelAssignment.nom = a.nom;
+  //     nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
+  //     nouvelAssignment.rendu = a.rendu;
+  //     nouvelAssignment.auteurName = a.auteurName ?? '';
+  //     nouvelAssignment.note = a.note ?? 0;
+  //     nouvelAssignment.remarques = a.remarques ?? '';
  
-      appelsVersAddAssignment.push(this.addAssignment(nouvelAssignment))
-    });
+  //     appelsVersAddAssignment.push(this.addAssignment(nouvelAssignment))
+  //   });
  
-    return forkJoin(appelsVersAddAssignment);
-  }
+  //   return forkJoin(appelsVersAddAssignment);
+  // }
  
 }

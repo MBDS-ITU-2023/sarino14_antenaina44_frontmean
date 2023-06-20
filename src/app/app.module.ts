@@ -33,6 +33,9 @@ import { LoginComponent } from './login/login.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+
+import { MatSelectModule } from '@angular/material/select';
+
 import {MatChipsModule} from '@angular/material/chips';
 
 const routes: Routes = [
@@ -86,6 +89,7 @@ const routes: Routes = [
     MatListModule, MatCardModule, MatCheckboxModule, MatSlideToggleModule,
     MatTableModule, MatPaginatorModule,
     MatToolbarModule, MatSidenavModule,
+    MatSelectModule,
     MatChipsModule
   ],
   providers: [],

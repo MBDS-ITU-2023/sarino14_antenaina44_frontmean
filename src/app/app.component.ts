@@ -52,14 +52,14 @@ export class AppComponent {
     return this.authService.loggedIn;
   }
 
-  creerDonneesDeTest() {
-    this.assigmmentsService.peuplerBDavecForkJoin()
-    .subscribe(() => {
-      console.log("Opération terminée, les 1000 données ont été insérées")
+  // creerDonneesDeTest() {
+  //   this.assigmmentsService.peuplerBDavecForkJoin()
+  //   .subscribe(() => {
+  //     console.log("Opération terminée, les 1000 données ont été insérées")
 
-      // on refresh la page pour que la liste apparaisse
-      // plusieurs manières de faire....
-      window.location.reload();
-    });
-  }
+  //     // on refresh la page pour que la liste apparaisse
+  //     // plusieurs manières de faire....
+  //     window.location.reload();
+  //   });
+  // }
 }
