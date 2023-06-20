@@ -3,7 +3,9 @@
         <h4>Assignments &nbsp;</h4>
         <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
         <button mat-button routerLink="/home"><mat-icon>home</mat-icon>Home </button>
-        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+        <nav class="ml-auto">
+            <button mat-raised-button color="primary" (click)="logout()">Se deconnecter</button>
+        </nav>
     </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>
@@ -18,7 +20,7 @@
                 <mat-card-header>
                     <mat-card-title><strong>{{titre}}</strong>
                     </mat-card-title>
-                    <div class="spacer"></div> <!-- Ajoutez cette ligne pour créer un espace vide flexible -->
+                    <div class="spacer"></div>
                     <a routerLink="/add">
                         <button mat-flat-button style="background-color: #57a4e2; " color="accent">Ajouter
                             Assignment</button>
@@ -38,7 +40,6 @@
                                         </mat-card-subtitle>
                                     </mat-card-title>
                                     <div class="spacer"></div>
-                                    <!-- Ajoutez cette ligne pour créer un espace vide flexible -->
                                     <p>
                                         Régler nb par page :
                                         <input type="range" min=1 max=100 value=10 [(ngModel)]="limit"
@@ -88,67 +89,78 @@
                         </mat-card>
                     </div>
                     <hr>
-                    <div class="card-flat">
-                        <mat-card>
-                            <div style="background-color: #57a4e2;">
-                                <mat-card-header>
-                                    <mat-card-title>
-                                        <!-- TITLE -->
-                                        Affichage avec mat-list / mat-list-item
-                                        <mat-card-subtitle>
-                                            <div>
-                                                <!-- SUBTITLE CONTENT -->
-                                            </div>
-                                        </mat-card-subtitle>
-                                    </mat-card-title>
-                                    <div class="spacer"></div>
-                                    <!-- Ajoutez cette ligne pour créer un espace vide flexible -->
-                                    <div>
-                                        <!-- RIGHT HEADER CONTENT -->
-                                    </div>
-                                </mat-card-header>
-                                <br>
-                            </div>
-                            <div>
-                                <!-- YOUR_CONTENT GOES HERE-->
-                                <mat-list *ngFor="let a of assignments">
-                                    <a style="text-decoration: none;" routerLink="/assignments/{{a.id}}">
-                                        <mat-list-item>
-                                            <p appRendu *ngIf="a.rendu; else nonsoumis">
+                    <div class="card-padded">
+
+                        <div class="card-flat">
+                            <mat-card>
+                                <div style="background-color: #57a4e2;">
+                                    <mat-card-header>
+                                        <mat-card-title>
+                                            Affichage avec mat-list / mat-list-item
+                                            <mat-card-subtitle>
+                                                <div>
+                                                </div>
+                                            </mat-card-subtitle>
+                                        </mat-card-title>
+                                        <div class="spacer"></div>
+                                        <div>
+                                        </div>
+                                    </mat-card-header>
+                                    <br>
+                                </div>
+                                <div>
+                                    <mat-list *ngFor="let a of assignments">
+                                        <a style="text-decoration: none;" routerLink="/assignments/{{a.id}}">
+                                            <mat-list-item>
+                                                <p appRendu *ngIf="a.rendu; else nonsoumis">
+                                                    <label><strong>{{a.nom}} - id = {{a._id}}</strong></label> <span
+                                                        style="float: right;">
+
+                                                        <mat-chip color="accent">
+                                                            RENDU
+                                                        </mat-chip>
+                                                    </span>
+                                                </p>
+                                            </mat-list-item>
+                                            <mat-card-actions>
+                                                <button mat-button>Date limite: {{a.dateDeRendu | date:
+                                                    'dd/MM/yy'}}</button>
+                                            </mat-card-actions>
+                                            <mat-divider></mat-divider>
+                                            <ng-template #nonsoumis>
                                                 <label><strong>{{a.nom}} - id = {{a._id}}</strong></label> <span
-                                                    style="float: right;">RENDU</span>
-                                            </p>
-                                        </mat-list-item>
-                                        <h3 mat-subheader>Date limite: {{a.dateDeRendu | date: 'dd/MM/yy'}}</h3>
+                                                    style="float: right;"><mat-chip color="warn">
+                                                        NON RENDU
+                                                    </mat-chip></span>
+                                            </ng-template>
+                                        </a>
                                         <mat-divider></mat-divider>
-                                        <ng-template #nonsoumis>
-                                            <label><strong>{{a.nom}} - id = {{a._id}}</strong></label> <span
-                                                style="float: right;"><button mat-stroked-button color="warn">NON
-                                                    RENDU</button></span>
-                                        </ng-template>
-                                    </a>
-                                    <mat-divider></mat-divider>
-                                </mat-list>
-                            </div>
-                        </mat-card>
+                                    </mat-list>
+                                </div>
+                            </mat-card>
+                        </div>
                     </div>
+
                     <h1>Exemple de scrolling virtuel infini</h1>
-                    <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport" #scroller>
-                        <mat-list *cdkVirtualFor="let a of assignments">
-                            <a routerLink="/assignments/{{a.id}}">
-                                <h3 mat-subheader>Date limite: {{a.dateDeRendu | date: 'dd/MM/yy'}}</h3>
-                                <mat-list-item>
-                                    <p appRendu *ngIf="a.rendu; else nonsoumis">
-                                        {{a.nom}} id = {{a._id}}
-                                    </p>
-                                    <ng-template #nonsoumis>
-                                        {{a.nom}} NON RENDU id = {{a._id}}
-                                    </ng-template>
-                                </mat-list-item>
-                                <mat-divider></mat-divider>
-                            </a>
-                        </mat-list>
-                    </cdk-virtual-scroll-viewport>
+
+                    <div><cdk-virtual-scroll-viewport itemSize="50" class="example-viewport" style="width: 1367px;
+                    " #scroller>
+                            <mat-list *cdkVirtualFor="let a of assignments">
+                                <a routerLink="/assignments/{{a.id}}">
+                                    <h3 mat-subheader>Date limite: {{a.dateDeRendu | date: 'dd/MM/yy'}}</h3>
+                                    <mat-list-item>
+                                        <p appRendu *ngIf="a.rendu; else nonsoumis">
+                                            {{a.nom}} id = {{a._id}}
+                                        </p>
+                                        <ng-template #nonsoumis>
+                                            {{a.nom}} NON RENDU id = {{a._id}}
+                                        </ng-template>
+                                    </mat-list-item>
+                                    <mat-divider></mat-divider>
+                                </a>
+                            </mat-list>
+                        </cdk-virtual-scroll-viewport>
+                    </div>
 
                 </main>
                 <mat-card-actions align="end">

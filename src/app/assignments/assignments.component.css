@@ -14,49 +14,65 @@ mat-sidenav {
 }
 
 .container {
-    display:flex;
-    flex-direction:column;
+  display: flex;
+  flex-direction: column;
 }
 
 .ajouterBtn {
-    align-self: flex-end;
+  align-self: flex-end;
 }
 
 .example-viewport {
-    height: 600px;
-    width: 1600px;
-    border: 1px solid black;
-  }
-  
-  .example-item {
-    height: 150px;
-  }
+  height: 600px;
+  width: 1600px;
+  border: 1px solid black;
+}
 
-  .demo-table {
-    width: 50%;
-  }
-  
-  .mat-column-id {
-    /* width: 32px; */
-    border-right: 0.5px dotted currentColor;
-    padding-right: 24px;
-    text-align: center;
-    font-size: 10px;
-  }
-  
-  .mat-column-nom {
-    border-right: 0.5px dotted currentColor;
-    padding-left: 16px;
-    font-size: 12px;
-  }
-  
-  .mat-column-dateDeRendu {
-    font-style: italic;
-    border-right: 0.5px dotted currentColor;
-  }
-  
-  .mat-column-rendu {
-    /* width: 32px; */
-    text-align: center;
-    font-weight: bold;
-  }
+.example-item {
+  height: 150px;
+}
+
+.demo-table {
+  width: 50%;
+}
+
+.mat-column-id {
+  /* width: 32px; */
+  border-right: 0.5px dotted currentColor;
+  padding-right: 24px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.mat-column-nom {
+  border-right: 0.5px dotted currentColor;
+  padding-left: 16px;
+  font-size: 12px;
+}
+
+.mat-column-dateDeRendu {
+  font-style: italic;
+  border-right: 0.5px dotted currentColor;
+}
+
+.mat-column-rendu {
+  /* width: 32px; */
+  text-align: center;
+  font-weight: bold;
+}
+
+
+.parent {
+  width: 400px;
+  height: 200px;
+  position: relative;
+}
+
+.child {
+  width: 50%;
+  height: 100%;
+  background-color: #ccc;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
